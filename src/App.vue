@@ -4,6 +4,7 @@
 <template>
   <Nav />
   <div class="container mx-auto">
+    
     <router-view />
   </div>
   
