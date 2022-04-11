@@ -1,29 +1,25 @@
-<script>
-    import {ref} from "vue";
-import useActivities from "../composables/useActivities";
-    import useActivity from "../composables/useActivities";
+<script setup>
+    import useActivities from "../composables/useActivities";
+    const {  activity } = useActivities();
 
-    const useActivity = useActivities();
 
-    const { activities, search } = useActivities();
-
-    const searchItem = ref("");
 </script>
 <template>
-    <div>
-        <input
-        v-model="searchItem"
-        @change="search(searchItem)"
-        type="text"
-        placeholder="Search an Activity..."
-        class="w-full py-4 mt-16 text-xl text-center rounded-full"
-        />
-        <div class="grid grid-cols-2 gap-16 pt-16">
-            <div v-for="(activity, index) in activities" :key="index">
-                <p>
-                    {{ activity.activity }}
-                </p>
-            </div>
-        </div>
+    <div class="mt-16">
+        <ul class="grid grid-cols-3 gap-12">
+            <router-link
+                class="p-4 bg-white rounded-lg shadow-2xl cursor-pointer hover:scale-105"
+                v-for="act in activity"
+                :key="act"
+                to="'/api/activity/'"
+            >
+            <div
+                class="max-w-md py-8 mx-auto mt-16 text-center bg-white rounded-lg">
+
+                    <h3 class="text-xl font-semibold tracking-tight">{{ act.activity }} </h3>
+            
+                </div>
+                </router-link>
+        </ul>
     </div>
 </template>

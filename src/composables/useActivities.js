@@ -2,39 +2,32 @@ import {ref} from "vue";
 import { useRequest } from "vue-request";
 import axios from "axios";
 
-const activities = ref([
-        
-]);
+const activity = ref();
+const participants = ref();
+
 const api = axios.create({
     baseURL: "http://www.boredapi.com/api/activity/",
-    
-    
+        
 });
 
 
 
-
-
-const getRandomActivities = async () => {
-  const res = await api.get();
-  if (res.status === 200) {
-    activities.value = [res.data.slip];
-  }
-};
-
-export const useActivities = () => {
-  getRandomActivities();
-  const search = async (searchItem) => {
-    const res = await api.get(`search/${searchItem}`);
-  
-    if (res.status === 200) {
-      activities.value = res.data.slips;
-    }
+const useActivities = () => {
+  const getRandomActivities = async () =>{
+    const res = await api.get();
+    activity.value = res.data.activity;
   };
-  return { activities, search };
+  
+   const getParticipants = async () => {
+     const res = await api.get('/api/activity?participants=:participants');
+     participants.value = res.data;
+   };
+  getRandomActivities();
+
+  return{ participants, activity, getRandomActivities, getParticipants }
 };
 
-export default useActivity = useActivities();
+export default useActivities;
 
 
 
