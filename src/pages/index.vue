@@ -1,25 +1,20 @@
 <script setup>
-    import useActivities from "../composables/useActivities";
-    const {  activity } = useActivities();
-
-
+  import useActivities from '../composables/useActivities'
+  const { activity } = useActivities()
 </script>
 <template>
-    <div class="mt-16">
-        <ul class="grid grid-cols-3 gap-12">
-            <router-link
-                class="p-4 bg-white rounded-lg shadow-2xl cursor-pointer hover:scale-105"
-                v-for="act in activity"
-                :key="act"
-                to="'/api/activity/'"
-            >
-            <div
-                class="max-w-md py-8 mx-auto mt-16 text-center bg-white rounded-lg">
-
-                    <h3 class="text-xl font-semibold tracking-tight">{{ act.activity }} </h3>
-            
-                </div>
-                </router-link>
-        </ul>
-    </div>
+  <div class="mt-16">
+    <ul class="grid grid-cols-1 gap-12">
+      <div
+        class="p-4 shadow-2xl py-8 mx-auto mt-16 text-center bg-white rounded-lg flex flex-col items-center gap-4"
+      >
+        <h3 class="text-xl font-semibold tracking-tight">
+          {{ activity.activity }}
+        </h3>
+        <p>Type: {{ activity.type }}</p>
+        <p>Participants: {{ activity.participants }}</p>
+        <p>Price: {{ activity.price }}</p>
+      </div>
+    </ul>
+  </div>
 </template>
