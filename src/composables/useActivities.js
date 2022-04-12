@@ -1,33 +1,29 @@
-import {ref} from "vue";
-import { useRequest } from "vue-request";
-import axios from "axios";
+import { ref } from 'vue'
+import { useRequest } from 'vue-request'
+import axios from 'axios'
 
-const activity = ref();
-const participants = ref();
+const activity = ref()
+const participants = ref()
 
 const api = axios.create({
-    baseURL: "http://www.boredapi.com/api/activity/",
-        
-});
-
-
+  baseURL: 'http://www.boredapi.com/api/activity/',
+})
 
 const useActivities = () => {
-  const getRandomActivities = async () =>{
-    const res = await api.get();
-    activity.value = res.data.activity;
-  };
-  
-   const getParticipants = async () => {
-     const res = await api.get('/api/activity?participants=:participants');
-     participants.value = res.data;
-   };
-  getRandomActivities();
+  const getRandomActivities = async () => {
+    const res = await api.get()
+    activity.value = res.data
+  }
 
-  return{ participants, activity, getRandomActivities, getParticipants }
-};
+  const getParticipants = async numberOfParticipants => {
+    const res = await api.get('/', {
+      params: { participants: numberOfParticipants },
+    })
+    activity.value = res.data
+  }
+  getRandomActivities()
 
-export default useActivities;
+  return { participants, activity, getRandomActivities, getParticipants }
+}
 
-
-
+export default useActivities
