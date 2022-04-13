@@ -1,7 +1,7 @@
 import { createRouter, createWebHistory} from "vue-router";
 import Index from "./pages/index.vue";
-import Activity from "./pages/activities.vue";
 import NotFound from "./pages/404.vue";
+import Activity from "./composables/useActivities.js";
 
 
 
